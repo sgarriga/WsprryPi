@@ -31,11 +31,15 @@ clean:
 	$(RM) *.o gpioclk wspr
 
 .PHONY: install
-install: wspr
+install: wspr gpioclk wspr_beacon.sh wspr_get_grid.sh wspr_ping.sh
 	install -m 0755 wspr $(prefix)/bin
 	install -m 0755 gpioclk $(prefix)/bin
+	install -m 0755 wspr_beacon.sh $(prefix)/bin
+	install -m 0755 wspr_get_grid.sh $(prefix)/bin
+	install -m 0755 wspr_ping.sh $(prefix)/bin
 
 .PHONY: uninstall
 uninstall:
-	$(RM) $(prefix)/bin/wspr $(prefix)/bin/gpioclk
+	$(RM) $(prefix)/bin/wspr $(prefix)/bin/gpioclk 
+	$(RM) $(prefix)/bin/wspr_beacon.sh $(prefix)/bin/wspr_get_grid.sh $(prefix)/bin/wspr_ping.sh
 
