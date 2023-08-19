@@ -44,6 +44,7 @@
 #include <time.h>
 #include <unistd.h>
 #include <vector>
+#include <fstream>
 
 #ifdef __cplusplus
 extern "C" {
@@ -179,6 +180,10 @@ volatile unsigned *peri_base_virt = nullptr;
 #define CLK_BUS_BASE (0x7E101000)
 #define DMA_BUS_BASE (0x7E007000)
 #define PWM_BUS_BASE (0x7e20C000) /* PWM controller */
+
+#define OK_LED_CONTROL_FNAME "/sys/class/leds/led0/brightness"
+#define OK_LED_RESET_FNAME "/sys/class/leds/led0/trigger"
+static std::ofstream ledfile;
 
 // Convert from a bus address to a physical address.
 #define BUS_TO_PHYS(x) ((x) & ~0xC0000000)
@@ -1272,6 +1277,8 @@ int main(const int argc, char *const argv[]) {
   setupDMA(constPage, instrPage, instrs);
   txoff();
 
+  ledfile.open(OK_LED_CONTROL_FNAME);
+
   if (mode == TONE) {
     // Test tone mode...
     double wspr_symtime = WSPR_SYMTIME;
@@ -1353,6 +1360,7 @@ int main(const int argc, char *const argv[]) {
       printf("\n");
     }*/
 
+    ledfile << "0"; // "off"
     std::cout << "Ready to transmit (setup complete)..." << std::endl;
     int band = 0;
     int n_tx = 0;
@@ -1422,6 +1430,7 @@ int main(const int argc, char *const argv[]) {
         int bufPtr = 0;
         txon();
         for (int i = 0; i < 162; i++) {
+          ledfile << ((i % 2) ? "0" : "1"); // toggle on/off
           gettimeofday(&sym_start, nullptr);
           timeval_subtract(&diff, &sym_start, &tvBegin);
           double elapsed = diff.tv_sec + diff.tv_usec / 1e6;
@@ -1469,6 +1478,15 @@ int main(const int argc, char *const argv[]) {
         break;
       }
     }
+  }
+
+  if (ledfile.is_open()) {
+    ledfile.close();   // done with our control of LED
+
+    // back to LED default action
+    ledfile.open(OK_LED_RESET_FNAME);
+    ledfile << "mmc0";
+    ledfile.close();
   }
 
   return 0;
