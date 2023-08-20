@@ -6,7 +6,7 @@ port to Antenna (and LPF), operates on LF, MF, HF and VHF bands from
 
 This is a fork of g4wnc's [WsprryPi](https://github.com/g4wnc/WsprryPi) with input from JamesP6000's [fork](https://github.com/JamesP6000/WsprryPi) I've added some custom scripts added to support the 2023 and 2024 [GSSC](https://hamsci.org/gssc-faqs) events.
 
-See the original [README](https://github.com/g4wnc/WsprryPi/blob/master/README) file for all details and credits for the original work.
+See the original [README](https://github.com/sgarriga/WsprryPi/blob/master/README) file for all details and credits for the original work.
 
 ## Installation
 On a **fresh** Raspian lite install... (tested with Buster and Bullseye only)<br>
