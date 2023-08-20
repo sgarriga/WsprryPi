@@ -10,15 +10,16 @@ See the original README file for all details and credits for the original work.
 
 ## Installation
 On a fresh Raspian lite install (tested with Buster and Bullseye only)
-Download and compile code:
-    sudo apt-get install git https://github.com/sgarriga/WsprryPi
-    cd WsprryPi
-    make
+Download and compile code:<br>
+    sudo apt-get install git <br>
+    git clone https://github.com/sgarriga/WsprryPi<br>
+    cd WsprryPi<br>
+    make<br>
 
-Install to /usr/local/bin:
-    sudo make install
+Install to /usr/local/bin:<br>
+    sudo make install<br>
 
-Uninstall:
+Uninstall:<br>
     sudo make uninstall
 
 
