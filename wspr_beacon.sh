@@ -16,5 +16,5 @@ else
     exit -1
 fi
 
-sudo /usr/local/bin/wspr -r -o $callsign $grid 10 40m  >> /var/log/wspr.log 2>&1 &
+sudo /usr/local/bin/wspr -r -o ${callsign} ${grid} 10 40m>>/var/log/wspr.log 2>&1 &
 
