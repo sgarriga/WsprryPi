@@ -7,4 +7,4 @@ local_time=`date --date='TZ="UTC" 2024-04-08 13:00:00' +%Y%m%d%H%M`
 echo "wspr_beacon.sh" | at -q z -t $local_time
 
 local_time=`date --date='TZ="UTC" 2024-04-09 00:10:00' +%Y%m%d%H%M`
-echo "sudo pkill -9 wspr*" | at -q z -t $local_time
+echo "sudo pkill -9 wspr" | at -q z -t $local_time
